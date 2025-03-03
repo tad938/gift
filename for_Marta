@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения, Тётя!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcccb; /* Мягкий розовый фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-in-out;
+            max-width: 600px;
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #d6336c; /* Розовый заголовок */
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        p {
+            font-size: 1.5rem;
+            color: #555; /* Серый текст */
+            line-height: 1.6;
+        }
+        button {
+            background-color: #d6336c; /* Розовый цвет кнопки */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+        }
+        button:hover {
+            background-color: #ff6699; /* Светлый розовый при наведении */
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        /* Стили для смайликов и цветов */
+        .emoji, .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 5s infinite ease-in-out;
+        }
+        .flower {
+            font-size: 3rem;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>С Днём Рождения, Тётя!</h1>
+        <p>Дорогая тётя Марта,</p>
+        <p>Пусть каждый день приносит радость,</p>
+        <p>Здоровье будет крепким, как скала,</p>
+        <p>Удача сопровождает в пути,</p>
+        <p>А счастье в доме будет и цвести!</p>
+        <p>С любовью и теплом, твой племянник!</p>
+    </div>
+
+    <button id="congratulateButton">просто нажми!!!</button>
+
+    <div id="march8Congrats" class="hidden container">
+        <h1>С 8 Марта!</h1>
+        <p>Дорогая тётя Марта, я конечно вас уважаю, но в этот раз решил сделать особенный подарок!</p>
+        <p>Пусть с каждым годом вы становитесь ещё счастливее,</p>
+        <p>Чтобы выздоравливали и не болели с этой болезнью (почки),</p>
+        <p>И поздравление от всего сердца!</p>
+        <p>С праздником весны!</p>
+    </div>
+
+    <script>
+        // Добавляем интерактивность
+        const button = document.getElementById('congratulateButton');
+        const march8Congrats = document.getElementById('march8Congrats');
+
+        button.addEventListener('click', () => {
+            march8Congrats.classList.remove('hidden'); // Показываем поздравление
+            button.style.display = 'none'; // Скрываем кнопку
+
+            // Создаём смайлики и цветы
+            createFloatingEmojis();
+        });
+
+        // Функция для создания плавающих смайликов и цветов
+        function createFloatingEmojis() {
+            const emojis = ['😊', '🌸', '🎉', '💐', '😍', '🌺', '🥳', '🌼'];
+            const numEmojis = 20; // Количество смайликов и цветов
+
+            for (let i = 0; i < numEmojis; i++) {
+                const emoji = document.createElement('div');
+                emoji.classList.add(Math.random() > 0.5 ? 'emoji' : 'flower');
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = `${Math.random() * 100}vw`; // Случайное положение по горизонтали
+                emoji.style.top = `${Math.random() * 100}vh`; // Случайное положение по вертикали
+                emoji.style.animationDuration = `${Math.random() * 3 + 2}s`; // Случайная скорость анимации
+                document.body.appendChild(emoji);
+            }
+        }
+
+        // Анимация при нажатии на контейнер
+        const container = document.querySelector('.container');
+        container.addEventListener('click', () => {
+            container.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                container.style.transform = 'scale(1)';
+            }, 300);
+        });
+    </script>
+</body>
+</html>
